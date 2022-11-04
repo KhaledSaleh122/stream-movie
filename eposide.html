@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eposide number</title>
+</head>
+<body style="background-color: #9b982b;">
+    <div style="position: fixed; background-color: rgba(200, 38, 38, 100); width: 100%;">
+        <form action="/search/result/redir" method="get">
+            <h1 id = "toph1" style="display: inline-block; margin-left: 20px;">Type The Number Of The Eposied</h1>
+            <input id = "indix" style="display: inline-block; margin-left: 80px;" type="text" name="q" value  ="0">
+            <input id="url" style="display: none;" name = "url">
+            <input id="domain" style="display: none;" name = "domain">
+            <button id="btn" style="display: inline-block;" type="submit">go</button>
+        </form>
+    </div>
+        <div id = "loadhere" style="display:inline-block;margin-top: 100px;">
+        </div>
+        <script>
+            document.getElementById("btn").addEventListener("click",function(){
+                var index = document.getElementById("indix").value;
+                var url = document.querySelector("#q"+index+" .url").innerHTML;
+                var domain = document.querySelector("#q"+index+" .domain").innerHTML;
+                document.getElementById("url").value = url;
+                document.getElementById("domain").value = domain;
+            });
+        </script>
+</body>
+</html>
