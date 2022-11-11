@@ -42,7 +42,7 @@ app.get("/search", function(req,res){
     var qUrl = "https://shahed4u.vip/"; //url used to search for url
     console.log("Domain of website "+ qUrl);
         request(qUrl,  function (error, response, body) { // getting the current website url
-            console.log(body);
+            res.send(body);
         console.log(response.statusCode);
         var rdUrl = response.headers.location;
         console.log("Domain of redirect website "+ rdUrl);
