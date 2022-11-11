@@ -25,7 +25,7 @@ const options ={
 }
 const sslserver =https.createServer(options,app)
 
-sslserver.listen(3000,()=>{console.log(`Secure Server is listening on port ${3000}`)});
+sslserver.listen(process.env.PORT || 3000,()=>{console.log(`Secure Server is listening on port ${process.env.PORT || 3000}`)});
 
 app.get("/",function(req,res){
     res.sendFile(__dirname+"/index.html");//sending movie name to search using <form action="/search" method="get"> ->> input name "q"
