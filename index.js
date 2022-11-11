@@ -32,7 +32,7 @@ app.get("/",function(req,res){
     res.sendFile(__dirname+"/index.html");//sending movie name to search using <form action="/search" method="get"> ->> input name "q"
 });
 
-app.get("/search",function(req,res){
+app.get("/search", function(req,res){
     if(downloadFile){
         downloadFile.destroy();
 
@@ -41,7 +41,7 @@ app.get("/search",function(req,res){
     console.log(mName);
     var qUrl = "https://shahed4u.vip/"; //url used to search for url
     console.log("Domain of website "+ qUrl);
-    var r = request.get({url:qUrl,followRedirect :false},  function (error, response, body) { // getting the current website url
+        request({url:qUrl},  function (error, response, body) { // getting the current website url
         console.log(response.statusCode);
         var rdUrl = response.headers.location;
         console.log("Domain of redirect website "+ rdUrl);
