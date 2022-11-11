@@ -27,7 +27,7 @@ app.get("/search",function(req,res){
     const qUrl_O = new URL(qUrl);
     console.log("Domain of website "+ qUrl);
     var htmlPage = "";
-    https.get(qUrl,function(res){
+    https.get({url:qUrl,timeout:5000},function(res){
         console.log(res);
         console.log(res.rawHeaders[9]);
     })
