@@ -9,6 +9,7 @@ const cloudscraper = require('cloudscraper-version.two');
 const captcha = require('2captcha');
 let cf = new CloudflareBypasser();
 const https = require('https');
+const { Console } = require("console");
 //const { http, https } = require('follow-redirects');
 ////////////////////////////////////
 var port = 3000;
@@ -20,17 +21,15 @@ app.get("/",function(req,res){
     res.sendFile(__dirname+"/index.html");//sending movie name to search using <form action="/search" method="get"> ->> input name "q"
 });
 
-app.get("/search",function(req,res){
+app.get("/search",async function(req,res){
     var mName = req.query.q;
     console.log("Movie Name : "+mName);
     var qUrl = "https://shahed4u.vip/";
     const qUrl_O = new URL(qUrl);
     console.log("Domain of website "+ qUrl);
     var htmlPage = "";
-    https.get(qUrl_O,function(res1){
-        console.log(res1);
-        res.send("tesaeas");
-    })
+    var res2 =  doPostToDoItem();
+    Console.log(res2);
     /*
     const request = https.request({ host: 'shahed4u.vip', path: '/'}, response => {
         response.on("data",(data)=>{
@@ -44,3 +43,49 @@ app.get("/search",function(req,res){
     request.end();
     */
 });
+
+
+
+async function doPostToDoItem(myItem) {
+
+    const https = require('https')
+
+    const data = JSON.stringify({
+        todo: myItem
+    });
+
+    const options = {
+        hostname: 'shahed4u.vip',
+        port: 443,
+        path: '/',
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': data.length
+        },
+    };
+
+    let p = new Promise((resolve, reject) => {
+        const req = https.request(options, (res) => {
+            res.setEncoding('utf8');
+            let responseBody = '';
+
+            res.on('data', (chunk) => {
+                responseBody += chunk;
+            });
+
+            res.on('end', () => {
+                resolve(JSON.parse(responseBody));
+            });
+        });
+
+        req.on('error', (err) => {
+            reject(err);
+        });
+
+        req.write(data)
+        req.end();
+    });
+
+    return await p;
+}
