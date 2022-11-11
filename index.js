@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: false }));
 const { http, https } = require('follow-redirects');
 //
 var port = 5000;
-app.listen(process.env.PORT||port,function(){
+app.listen(process.env.PORT,function(){
     console.log("Server Started at port "+ port);
 });
 
