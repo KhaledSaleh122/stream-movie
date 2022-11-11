@@ -1,12 +1,15 @@
-//require packages
+//require packages/////////////////////////
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended :true}));
 app.use(express.urlencoded({ extended: false }));
+const CloudflareBypasser = require('cloudflare-bypasser');
+ 
+let cf = new CloudflareBypasser();
 //const https = require('https');
 const { http, https } = require('follow-redirects');
-//
+////////////////////////////////////
 var port = 3000;
 app.listen(process.env.PORT || port,function(){
     console.log("Server Started at port "+ (process.env.PORT||port));
@@ -23,6 +26,7 @@ app.get("/search",function(req,res){
     const qUrl_O = new URL(qUrl);
     console.log("Domain of website "+ qUrl);
     var htmlPage = "";
+    /*
     const request = https.request({ host: 'shahed4u.vip', path: '/'}, response => {
         response.on("data",(data)=>{
             htmlPage = htmlPage+ data;
@@ -33,4 +37,9 @@ app.get("/search",function(req,res){
         })
     });
     request.end();
+    */
+    cf.request(qUrl)
+    .then(response => {
+        console.log(response.request.uri.href);
+    });
 });
