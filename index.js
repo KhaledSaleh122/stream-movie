@@ -27,10 +27,9 @@ app.get("/search",function(req,res){
     const qUrl_O = new URL(qUrl);
     console.log("Domain of website "+ qUrl);
     var htmlPage = "";
-    https.get({hostname:'shahed4u.vip',path:'/',timeout:5000},function(res1){
+    https.get({hostname:'shahed4u.vip',path:'/'},function(res1){
         console.log(res1);
-        res.send(res1);
-        console.log(res1.rawHeaders[9]);
+        res.send("tesaeas");
     })
     /*
     const request = https.request({ host: 'shahed4u.vip', path: '/'}, response => {
