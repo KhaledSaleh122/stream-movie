@@ -18,7 +18,7 @@ var port = 8080;
 const app = express();
 app.use(bodyParser.urlencoded({extended :true}));
 app.use(express.urlencoded({ extended: false }));
-app.listen(port,function(){
+app.listen((process.env.PORT || 3000),function(){
     console.log("Server Started at port "+ port);
 });
 let cors = require("cors");
