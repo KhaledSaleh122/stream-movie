@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: false }));
 const { http, https } = require('follow-redirects');
 //
 var port = 8080;
-app.listen(port,function(){
+app.listen(process.env.PORT||port,function(){
     console.log("Server Started at port "+ port);
 });
 
