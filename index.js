@@ -41,13 +41,14 @@ app.get("/search", function(req,res){
     console.log(mName);
     var qUrl = "https://shahed4u.vip/"; //url used to search for url
     console.log("Domain of website "+ qUrl);
-        request({url:qUrl},  function (error, response, body) { // getting the current website url
+        request(qUrl,  function (error, response, body) { // getting the current website url
         console.log(response.statusCode);
         var rdUrl = response.headers.location;
         console.log("Domain of redirect website "+ rdUrl);
         if(error){
             console.log("Error In URl [Rep] = "+ error);
         }else{
+/*
             request(encodeURI(rdUrl+"?s="+mName.replace(" ","+")),function(urlErr,urlRes,urlBody){ //getting html page for the qurey [name of movie]
                 if(urlErr){
                     console.log("Error In Current URl [Rep] = "+ urlErr);
@@ -60,6 +61,7 @@ app.get("/search", function(req,res){
                     //res.send(urlBody);
                 }
             });
+            */
         }
     });
 });
