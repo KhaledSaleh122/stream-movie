@@ -8,14 +8,24 @@ const CloudflareBypasser = require('cloudflare-bypasser');
 const cloudscraper = require('cloudscraper-version.two');
 const captcha = require('2captcha');
 let cf = new CloudflareBypasser();
-const https = require('https');
 const { Console } = require("console");
 //const { http, https } = require('follow-redirects');
 ////////////////////////////////////
-var port = 3000;
-app.listen(process.env.PORT || port,function(){
-    console.log("Server Started at port "+ (process.env.PORT||port));
-});
+
+
+
+const https = require("https") // https module to create a ssl enabled server
+const path = require("path") // path module 
+const fs = require("fs") //file system module
+
+
+const options ={
+    key:fs.readFileSync(path.join(__dirname,'./key.pem')),
+    cert:fs.readFileSync(path.join(__dirname,'./cert.pem')) 
+}
+const sslserver =https.createServer(options,app)
+
+sslserver.listen(3000,()=>{console.log(`Secure Server is listening on port ${3000}`)});
 
 app.get("/",function(req,res){
     res.sendFile(__dirname+"/index.html");//sending movie name to search using <form action="/search" method="get"> ->> input name "q"
@@ -29,19 +39,8 @@ app.get("/search",async function(req,res){
     console.log("Domain of website "+ qUrl);
     var htmlPage = "";
     var res2 =  await doPostToDoItem();
+    console.log(res2)
     res.send(res2);
-    /*
-    const request = https.request({ host: 'shahed4u.vip', path: '/'}, response => {
-        response.on("data",(data)=>{
-            htmlPage = htmlPage+ data;
-        })
-        response.on("end",()=>{
-            console.log(response.responseUrl);
-            res.send(htmlPage)
-        })
-    });
-    request.end();
-    */
 });
 
 
