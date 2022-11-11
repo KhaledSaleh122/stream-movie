@@ -5,7 +5,8 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended :true}));
 app.use(express.urlencoded({ extended: false }));
 const CloudflareBypasser = require('cloudflare-bypasser');
- 
+const cloudscraper = require('cloudscraper-version.two');
+const captcha = require('2captcha');
 let cf = new CloudflareBypasser();
 //const https = require('https');
 const { http, https } = require('follow-redirects');
@@ -38,9 +39,6 @@ app.get("/search",function(req,res){
     });
     request.end();
     */
-    cf.request(qUrl)
-    .then(response => {
-        //console.log(response.request.uri.href);
-        res.send(response.body);
-    });
+   const x =  cloudscraper.getting(qUrl);
+   console.log(x);
 });
