@@ -8,8 +8,8 @@ app.use(express.urlencoded({ extended: false }));
 const { http, https } = require('follow-redirects');
 //
 var port = 3000;
-app.listen(process.env.PORT,function(){
-    console.log("Server Started at port "+ port);
+app.listen(process.env.PORT || port,function(){
+    console.log("Server Started at port "+ (process.env.PORT||port));
 });
 
 app.get("/",function(req,res){
@@ -22,8 +22,15 @@ app.get("/search",function(req,res){
     var qUrl = "https://shahed4u.vip/";
     const qUrl_O = new URL(qUrl);
     console.log("Domain of website "+ qUrl);
+    var htmlPage = "";
     const request = https.request({ host: 'shahed4u.vip', path: '/'}, response => {
-        console.log(response.responseUrl);
+        response.on("data",(data)=>{
+            htmlPage = htmlPage+ data;
+        })
+        response.on("end",()=>{
+            console.log(response.responseUrl);
+            res.send(htmlPage)
+        })
     });
     request.end();
 });
