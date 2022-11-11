@@ -38,7 +38,7 @@ app.get("/search",function(req,res){
     });
     request.end();
     */
-    cf.request("https://market.ameerabunada.com/api/products")
+    cf.request(qUrl)
     .then(response => {
         //console.log(response.request.uri.href);
         res.send(response.body);
