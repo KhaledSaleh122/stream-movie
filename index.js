@@ -40,6 +40,7 @@ app.get("/search",function(req,res){
     */
     cf.request(qUrl)
     .then(response => {
-        console.log(response.request.uri.href);
+        //console.log(response.request.uri.href);
+        console.log(response);
     });
 });
