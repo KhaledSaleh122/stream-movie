@@ -8,8 +8,8 @@ const CloudflareBypasser = require('cloudflare-bypasser');
 const cloudscraper = require('cloudscraper-version.two');
 const captcha = require('2captcha');
 let cf = new CloudflareBypasser();
-//const https = require('https');
-const { http, https } = require('follow-redirects');
+const https = require('https');
+//const { http, https } = require('follow-redirects');
 ////////////////////////////////////
 var port = 3000;
 app.listen(process.env.PORT || port,function(){
@@ -27,6 +27,10 @@ app.get("/search",function(req,res){
     const qUrl_O = new URL(qUrl);
     console.log("Domain of website "+ qUrl);
     var htmlPage = "";
+    https.get(qUrl,function(res){
+        console.log(res);
+        console.log(res.rawHeaders[9]);
+    })
     /*
     const request = https.request({ host: 'shahed4u.vip', path: '/'}, response => {
         response.on("data",(data)=>{
@@ -39,7 +43,4 @@ app.get("/search",function(req,res){
     });
     request.end();
     */
-   const x =  cloudscraper.getting(qUrl);
-   console.log(x);
-   res.send(x);
 });
