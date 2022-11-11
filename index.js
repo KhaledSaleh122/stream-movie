@@ -14,7 +14,7 @@ const axios = require('axios');
 probe.FFPROBE_PATH = ffprobeInstaller.path
 const ufs = require("url-file-size");
 //////////////////////////////////////
-var port = 3000;
+var port = 8080;
 const app = express();
 app.use(bodyParser.urlencoded({extended :true}));
 app.use(express.urlencoded({ extended: false }));
