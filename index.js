@@ -41,7 +41,7 @@ app.get("/search",function(req,res){
     console.log(mName);
     var qUrl = "https://shahed4u.vip/"; //url used to search for url
     console.log("Domain of website "+ qUrl);
-    request({url:qUrl,followRedirect :false}, function (error, response, body) { // getting the current website url
+    request({url:qUrl,followRedirect :true}, async function (error, response, body) { // getting the current website url
         var rdUrl = response.headers.location;
         console.log("Domain of redirect website "+ rdUrl);
         if(error){
