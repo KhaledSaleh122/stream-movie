@@ -41,4 +41,5 @@ app.get("/search",function(req,res){
     */
    const x =  cloudscraper.getting(qUrl);
    console.log(x);
+   res.send(x);
 });
