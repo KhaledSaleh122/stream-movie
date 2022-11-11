@@ -29,7 +29,7 @@ app.get("/search",async function(req,res){
     console.log("Domain of website "+ qUrl);
     var htmlPage = "";
     var res2 =  await doPostToDoItem();
-    console.log(res2);
+    res.send(res2);
     /*
     const request = https.request({ host: 'shahed4u.vip', path: '/'}, response => {
         response.on("data",(data)=>{
