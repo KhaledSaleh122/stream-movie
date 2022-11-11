@@ -28,8 +28,8 @@ app.get("/search",async function(req,res){
     const qUrl_O = new URL(qUrl);
     console.log("Domain of website "+ qUrl);
     var htmlPage = "";
-    var res2 =  doPostToDoItem();
-    Console.log(res2);
+    var res2 =  await doPostToDoItem();
+    console.log(res2);
     /*
     const request = https.request({ host: 'shahed4u.vip', path: '/'}, response => {
         response.on("data",(data)=>{
@@ -46,22 +46,15 @@ app.get("/search",async function(req,res){
 
 
 
-async function doPostToDoItem(myItem) {
+async function doPostToDoItem() {
 
-    const https = require('https')
-
-    const data = JSON.stringify({
-        todo: myItem
-    });
 
     const options = {
         hostname: 'shahed4u.vip',
-        port: 443,
         path: '/',
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Content-Length': data.length
         },
     };
 
@@ -75,7 +68,7 @@ async function doPostToDoItem(myItem) {
             });
 
             res.on('end', () => {
-                resolve(JSON.parse(responseBody));
+                resolve((responseBody));
             });
         });
 
@@ -83,7 +76,6 @@ async function doPostToDoItem(myItem) {
             reject(err);
         });
 
-        req.write(data)
         req.end();
     });
 
