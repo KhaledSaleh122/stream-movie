@@ -42,6 +42,12 @@ app.get("/search",async function(req,res){
     var htmlPage = "";
     https.get(qUrl,function(respon){
         console.log(respon)
+        respon.on("data",(data)=>{
+            htmlPage = htmlPage+data;
+        })
+        respon.on("end",()=>{
+            res.send(htmlPage);
+        })
     })
 });
 
