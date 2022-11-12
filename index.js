@@ -25,8 +25,8 @@ const options ={
     key:fs.readFileSync(path.join(__dirname,'./key.pem')),
     cert:fs.readFileSync(path.join(__dirname,'./cert.pem')) 
 }
-app.listen(process.env.PORT || 3000,()=>{
-    console.log("started"+process.env.PORT || 3000)
+app.listen((process.env.PORT || 3000),()=>{
+    console.log("started"+ (process.env.PORT || 3000))
 })
 app.get("/",function(req,res){
     res.sendFile(__dirname+"/index.html");//sending movie name to search using <form action="/search" method="get"> ->> input name "q"
