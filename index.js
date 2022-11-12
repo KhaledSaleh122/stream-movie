@@ -11,7 +11,7 @@ let cf = new CloudflareBypasser();
 const { Console } = require("console");
 //const { http, https } = require('follow-redirects');
 ////////////////////////////////////
-
+app.use(express.static(__dirname));
 
 
 const https = require("https") // https module to create a ssl enabled server
