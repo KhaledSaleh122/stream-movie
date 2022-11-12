@@ -35,7 +35,8 @@ app.get("/",function(req,res){
 app.get("/search",async function(req,res){
     var mName = req.query.q;
     console.log("Movie Name : "+mName);
-    var qUrl = "https://shahed4u.vip/";
+    //var qUrl = "https://shahed4u.vip/";
+    var qUrl = "https://www.youtube.com/";
     const qUrl_O = new URL(qUrl);
     console.log("Domain of website "+ qUrl);
     var htmlPage = "";
