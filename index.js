@@ -16,7 +16,9 @@ const { Console } = require("console");
 
 const https = require("https") // https module to create a ssl enabled server
 const path = require("path") // path module 
-const fs = require("fs") //file system module
+const fs = require("fs"); //file system module
+const { http } = require("follow-redirects");
+const { Http2ServerRequest } = require("http2");
 
 
 const options ={
@@ -38,45 +40,9 @@ app.get("/search",async function(req,res){
     const qUrl_O = new URL(qUrl);
     console.log("Domain of website "+ qUrl);
     var htmlPage = "";
-    var res2 =  await doPostToDoItem();
-    console.log(res2)
-    res.send(res2);
+    https.get(qUrl,function(respon){
+        console.log(respon)
+    })
 });
 
 
-
-async function doPostToDoItem() {
-
-
-    const options = {
-        hostname: 'shahed4u.vip',
-        path: '/',
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    };
-
-    let p = new Promise((resolve, reject) => {
-        const req = https.request(options, (res) => {
-            res.setEncoding('utf8');
-            let responseBody = '';
-
-            res.on('data', (chunk) => {
-                responseBody += chunk;
-            });
-
-            res.on('end', () => {
-                resolve((responseBody));
-            });
-        });
-
-        req.on('error', (err) => {
-            reject(err);
-        });
-
-        req.end();
-    });
-
-    return await p;
-}
